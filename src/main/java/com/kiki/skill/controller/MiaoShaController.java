@@ -17,10 +17,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +43,6 @@ public class MiaoShaController implements InitializingBean {
     /**
      *系统初始化的时候做的事情。
      * 在容器启动时候，检测到了实现了接口InitializingBean之后，
-     * @throws Exception
      */
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -62,15 +58,23 @@ public class MiaoShaController implements InitializingBean {
         }
     }
 
-    @RequestMapping(value = "/do_miaosha", method = RequestMethod.POST)
+    /**
+     * 秒杀地址隐藏接口
+     */
+    @RequestMapping(value = "/{path}/do_miaosha", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData<Integer> doMiaoSha(Model model, SkillUser user,
-                                           @RequestParam("goodsId") Long goodsId
+    public ResultData<Integer> doMiaoShaPath(Model model, SkillUser user,
+                                           @RequestParam("goodsId") Long goodsId,
+                                             @PathVariable("path")String path
     ){
         if( user == null ){
             return ResultData.error(MsgCode.SESSION_EMPTY);
         }
-
+        // 从redis中取出path验证
+        boolean check = miaoShaService.checkPath(user,goodsId,path);
+        if(!check){
+            return ResultData.error(MsgCode.PATH_ERROR);
+        }
         // 判断是否秒杀过
         SkillOrder order = orderService.getOrderByUseridAndGoodsid_cache(user.getId(), goodsId);
         if(order != null){
@@ -101,10 +105,6 @@ public class MiaoShaController implements InitializingBean {
      * 下单成功返回  订单编号
      * 秒杀失败 返回-1
      * 排队中 返回0
-     * @param model
-     * @param user
-     * @param goodsId
-     * @return
      */
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     @ResponseBody
@@ -134,6 +134,47 @@ public class MiaoShaController implements InitializingBean {
         String path = miaoShaService.creatPath(user,goodsId);
         return ResultData.success(path);
     }
+
+//    /**
+//     * 秒杀接口
+//     * @param model
+//     * @param user
+//     * @param goodsId
+//     * @return
+//     */
+//    @RequestMapping(value = "/do_miaosha", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ResultData<Integer> doMiaoSha(Model model, SkillUser user,
+//                                         @RequestParam("goodsId") Long goodsId
+//    ){
+//        if( user == null ){
+//            return ResultData.error(MsgCode.SESSION_EMPTY);
+//        }
+//
+//        // 判断是否秒杀过
+//        SkillOrder order = orderService.getOrderByUseridAndGoodsid_cache(user.getId(), goodsId);
+//        if(order != null){
+//            return ResultData.error(MsgCode.REPECT_MIAOSHA);
+//        }
+//        // 用本地  内存 来减少对 redis的访问
+//        //Boolean over =  localMap.get(goodsId);
+////        if(over){
+////            return ResultData.error(MsgCode.MIAO_SHA_OVER);
+////        }
+//        // 减redis的库存
+//        Long stock = redisService.decr(GoodsKey.getMiaoShaGoodsStock, "" + goodsId);
+//        if(stock <= 0){
+//            // localMap.put(goodsId,true);
+//            return ResultData.error(MsgCode.MIAO_SHA_OVER);
+//        }
+//        MiaoShaMessage miaoShaMessage = new MiaoShaMessage();
+//        miaoShaMessage.setUser(user);
+//        miaoShaMessage.setGoodId(goodsId);
+//        // 发送消息到队列中  入队
+//        mqSender.send(miaoShaMessage);
+//        // 0 排队中
+//        return ResultData.success(0);
+//    }
 
 //    /**
 //     * 1000*10

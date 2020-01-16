@@ -95,12 +95,27 @@ public class MiaoShaServiceImpl implements MiaoShaService {
     }
 
     /**
-     * 来获取秒杀接口的path，
+     * 设置  一个path存入redis中，传到前台。
      */
     @Override
     public String creatPath(SkillUser user, Long goodsId) {
         String path = MD5Util.md5(UUIDUtil.uuid()+"123456");
-        redisService.set(MiaoShaKey.getMiaoShaPath,""+user.getId()+"_"+goodsId,path);
+        redisService.set(MiaoShaKey.getMiaoShaPath,user.getId()+"_"+goodsId,path);
         return path;
+    }
+
+    /**
+     * 从redis中取出path，验证path
+     */
+    @Override
+    public boolean checkPath(SkillUser user, Long goodsId, String path) {
+        if (user == null || path == null){
+            return false;
+        }
+        String check = redisService.get(MiaoShaKey.getMiaoShaPath, user.getId() + "_" + goodsId, String.class);
+
+        // 这个点很坑，目前还没有找到解决的配置,解决redis中字符串是双引号的
+        String str = check.substring(1,check.length()-1);
+        return path.equals(str);
     }
 }

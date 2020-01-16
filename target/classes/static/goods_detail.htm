@@ -197,16 +197,16 @@
 	function getMiaoshaPath(){
 	    var goodsId = $("#goodsId").val();
 	    $.ajax({
-			url: "/miaosha/do_miaosha",
-			type: "POST",
+			url: "/miaosha/getPath",
+			type: "GET",
 			data:{
 			    goodsId : goodsId
 			},
 			success:function(data){
 			    if(data.code == 0){
                     //window.location.href = "order_detail.htm?orderId="+data.data.id;
-					// 轮询
-					getMiaoshaResult($("#goodsId").val());
+					var path = data.data;
+					doMiaoSha(path)
 				}else{
                     layer.msg(data.msg);
 				}
@@ -217,6 +217,27 @@
 		});
 	}
 
+	function doMiaoSha(path) {
+	    alert(path);
+		$.ajax({
+			url : "/miaosha/" + path + "/do_miaosha",
+			type : "POST",
+            data:{
+                goodsId : $("#goodsId").val()
+            },
+            success:function(data){
+                if(data.code == 0){
+                    //window.location.href = "order_detail.htm?orderId="+data.data.id;
+                    getMiaoshaResult($("#goodsId").val());
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error : function(){
+                layer.msg("客户端有误！");
+            }
+		});
+    }
 
 
 

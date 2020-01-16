@@ -10,4 +10,6 @@ public interface MiaoShaService {
     long getMiaoShaResult(Long userId, Long goodsId);
 
     String creatPath(SkillUser user, Long goodsId);
+
+    boolean checkPath(SkillUser user, Long goodsId, String path);
 }

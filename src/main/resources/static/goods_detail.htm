@@ -218,8 +218,9 @@
 	}
 
 	function doMiaoSha(path) {
+	    alert(path);
 		$.ajax({
-			url : "/miaosha/"+path+"/do_miaosha",
+			url : "/miaosha/" + path + "/do_miaosha",
 			type : "POST",
             data:{
                 goodsId : $("#goodsId").val()

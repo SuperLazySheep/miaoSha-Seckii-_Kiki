@@ -65,3 +65,7 @@ q
 Asrc/main/java/com/kiki/skill/service/impl/MiaoShaServiceImpl.java,3\6\36ce8faa7597abeb582b21de529f30b6a3e08490
 b
 2src/main/java/com/kiki/skill/config/WebConfig.java,5\2\52d10c189a44e6f5b362645407eb2e6f0b09da60
+c
+3src/main/java/com/kiki/skill/redis/RedisConfig.java,3\d\3d59f2540db29703feaf56a86b6e2331bb38002d
+h
+8src/main/java/com/kiki/skill/redis/RedisPoolFactory.java,c\6\c62d84f1cee984e112ab3ccd08a7a1b5b4e29895

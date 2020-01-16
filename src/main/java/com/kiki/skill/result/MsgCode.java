@@ -16,6 +16,8 @@ public class MsgCode {
     public static MsgCode EMPTY = new MsgCode(203,"无数据");
     public static MsgCode SERVER_ERROR = new MsgCode(500100,"服务端异常哦！");
     public static MsgCode BIND_ERROR = new MsgCode(500101,"参数效验错误:%s");
+    public static MsgCode PATH_ERROR = new MsgCode(500102,"无效路径");
+
     //登录模块异常 5002xx
     public static MsgCode SESSION_EMPTY = new MsgCode(500210,"Session不存在或者已经失效");
     public static MsgCode PASSWORD_EMPTY = new MsgCode(500211,"密码不能为空");
