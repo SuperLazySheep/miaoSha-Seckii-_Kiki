@@ -1,0 +1,9 @@
+
+"squid:ClassVariableVisibilityCheck
+"]Make getGetGoodsDetail a static final constant or non-public and provide accessors if needed.(œ·Ø•úÿÿÿÿ
+†"squid:ClassVariableVisibilityCheck	"XMake getGoodsList a static final constant or non-public and provide accessors if needed.(Ï‘â
+Qsquid:S1444":Make this "public static getMiaoShaGoodsStock" field final(Ğ–‚©
+Isquid:S1444	"2Make this "public static getGoodsList" field final(Ï‘â
+Ssquid:S1444
+"7Make this "public static getGetGoodsDetail" field final(œ·Ø•úÿÿÿÿ
+"squid:ClassVariableVisibilityCheck"`Make getMiaoShaGoodsStock a static final constant or non-public and provide accessors if needed.(Ğ–‚©

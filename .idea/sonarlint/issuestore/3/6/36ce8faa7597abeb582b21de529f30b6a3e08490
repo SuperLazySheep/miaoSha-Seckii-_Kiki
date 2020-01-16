@@ -1,0 +1,6 @@
+
+Zsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8ğÛ˜Èú-
+fsquid:UselessImportCheck"6Remove this unused import 'sun.security.provider.MD5'.(Íõ÷Ôûÿÿÿÿ8‡Éëáú-
+„squid:S1488."aImmediately return this expression instead of assigning it to the temporary variable "orderInfo".(ÿ—¦ÿÿÿÿÿ8§ìàÃú-
+^squid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8ğÛ˜Èú-
+Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(Íõ÷Ôûÿÿÿÿ8‡Éëáú-

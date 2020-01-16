@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+  <contextName>logback</contextName>
+  <property name="log_dir" value="./log"/>
+  <property name="maxHistory" value="30"/>
+  <property name="DATETIME" value="yyyy-MM-dd HH:mm:ss"/>
+  <property name="home" value="./log"/>
+  <property name="minIndex" value="1"/>
+  <property name="maxIndex" value="3"/>
+  <property name="maxHistory" value="5"/>
+  <property name="maxSize" value="10MB"/>
+  <property name="charset" value="UTF-8"/>
+  <property name="totalSize" value="50MB"/>
+  <property name="pattern" value="%d [%t] %-5p %replace(%caller{1}){'\\s|Caller|\\+0|at', ''}- %msg%n"/>
+  <property name="outPattern" value="%d{HH:mm:ss} [%t] %-5p %replace(%caller{1}){'\\s|Caller|\\+0|at', ''}- %msg%n"/>
+
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder charset="utf-8">
+      <pattern>%d{${DATETIME}} [%thread] %-5level %logger -%msg%n</pattern>
+    </encoder>
+  </appender>
+  <!-- INFO 输入到文件，按日期和文件大小 -->
+  <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <encoder charset="utf-8">
+      <pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
+      </pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- 按天回滚 daily -->
+      <fileNamePattern>${log_dir}/info%d{yyyy-MM-dd}.log
+      </fileNamePattern>
+      <!-- 日志最大的历史 60天 -->
+      <maxHistory>${maxHistory}</maxHistory>
+    </rollingPolicy>
+  </appender>
+  <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${home}/error.log</file>
+    <!--过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。-->
+    <!--返回DENY，日志将立即被抛弃不再经过其他过滤器；返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。-->
+    <!--过滤器被添加到<Appender> 中，为<Appender> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<Appender> 有多个过滤器时，按照配置顺序执行。-->
+    <!--级别过滤器，根据日志级别进行过滤。如果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志-->
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <!--设置过滤级别-->
+      <level>error</level>
+      <!--用于配置符合过滤条件的操作-->
+      <onMatch>ACCEPT</onMatch>
+      <!--用于配置不符合过滤条件的操作-->
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${log_dir}/error%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>${maxHistory}</maxHistory>
+      <maxFileSize>${maxSize}</maxFileSize>
+      <totalSizeCap>${totalSize}</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <charset>${charset}</charset>
+      <pattern>${pattern}</pattern>
+    </encoder>
+  </appender>
+  <logger name="com.aegis.dispute.TestEs" level="info" additivity="true">
+    <appender-ref ref="info"/>
+  </logger>
+  <logger name="com.aegis.dispute.service.impl" level="info" additivity="true">
+    <appender-ref ref="info"/>
+  </logger>
+  <logger name="exception" level="error">
+    <appender-ref ref="ERROR"/>
+  </logger>
+
+  <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="ERROR" />
+  <root level="info">
+    <appender-ref ref="console"/>
+    <appender-ref ref="info"/>
+    <appender-ref ref="ERROR"/>
+  </root>
+
+</configuration>
