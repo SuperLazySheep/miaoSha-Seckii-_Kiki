@@ -13,6 +13,7 @@ import com.kiki.skill.service.GoodsService;
 import com.kiki.skill.service.MiaoShaService;
 import com.kiki.skill.service.OrderService;
 import com.kiki.skill.vo.GoodsVo;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/miaosha")
+@Api("秒杀接口")
 public class MiaoShaController implements InitializingBean {
     @Autowired
     RedisService redisService;

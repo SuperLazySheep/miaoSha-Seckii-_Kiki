@@ -7,6 +7,7 @@ import com.kiki.skill.redis.UserKey;
 import com.kiki.skill.result.MsgCode;
 import com.kiki.skill.result.ResultData;
 import com.kiki.skill.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Author KiKi(sonQQ)
  * @TIme 29/11
  */
+@Api(value = "Test接口")
 @Controller
 @RequestMapping("/demo")
 public class DemoController {

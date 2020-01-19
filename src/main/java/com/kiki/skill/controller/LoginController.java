@@ -5,6 +5,7 @@ import com.kiki.skill.result.ResultData;
 import com.kiki.skill.service.SkillUserService;
 import com.kiki.skill.util.ValidatorUtil;
 import com.kiki.skill.vo.LoginVo;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
+@Api("登陆接口")
 @Controller
 @RequestMapping("/login")
 @Slf4j

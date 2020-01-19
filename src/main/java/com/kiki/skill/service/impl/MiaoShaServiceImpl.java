@@ -114,7 +114,7 @@ public class MiaoShaServiceImpl implements MiaoShaService {
         }
         String check = redisService.get(MiaoShaKey.getMiaoShaPath, user.getId() + "_" + goodsId, String.class);
 
-        // 这个点很坑，目前还没有找到解决的配置,解决redis中字符串是双引号的
+        // 这个点很坑，目前还没有找到解决的配置,解决redis中字符串是双引号的    ""ss""
         String str = check.substring(1,check.length()-1);
         return path.equals(str);
     }

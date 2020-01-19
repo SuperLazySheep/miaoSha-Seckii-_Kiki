@@ -69,3 +69,15 @@ c
 3src/main/java/com/kiki/skill/redis/RedisConfig.java,3\d\3d59f2540db29703feaf56a86b6e2331bb38002d
 h
 8src/main/java/com/kiki/skill/redis/RedisPoolFactory.java,c\6\c62d84f1cee984e112ab3ccd08a7a1b5b4e29895
+c
+3src/main/java/com/kiki/skill/result/ResultData.java,3\4\34d446cc7aa2abec6e6d5dfa6e78da7cb3558250
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+Z
+*src/main/resources/static/goods_detail.htm,a\2\a2d281ad39fe476e509c6dcd6873e195c2fa7da1
+V
+&target/classes/static/goods_detail.htm,6\2\62bc6326a98f8405c98e6ddd5fb8d6a5c75b7dde
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+f
+6src/main/java/com/kiki/skill/config/SwaggerConfig.java,4\b\4b9d2d43abd294374dc1edeb52cf7d21d5588501

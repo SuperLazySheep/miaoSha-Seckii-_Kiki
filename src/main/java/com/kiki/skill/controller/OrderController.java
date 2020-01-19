@@ -9,6 +9,7 @@ import com.kiki.skill.service.GoodsService;
 import com.kiki.skill.service.OrderService;
 import com.kiki.skill.vo.GoodsVo;
 import com.kiki.skill.vo.OrderDetailVo;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Api("订单接口")
 @Controller
 @RequestMapping("/order")
 public class OrderController {

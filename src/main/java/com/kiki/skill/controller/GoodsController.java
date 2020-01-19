@@ -9,6 +9,7 @@ import com.kiki.skill.service.SkillUserService;
 import com.kiki.skill.service.impl.SkillUserServiceImpl;
 import com.kiki.skill.vo.GoodsDetailVo;
 import com.kiki.skill.vo.GoodsVo;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
+@Api(value = "订单接口")
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
